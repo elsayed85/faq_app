@@ -6,7 +6,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes([
     'login'    => true,
     'logout'   => true,
@@ -15,6 +14,5 @@ Auth::routes([
     'confirm'  => false,  // for additional password confirmations
     'verify'   => false,  // for email verification
 ]);
-
 
 Route::get('/home', 'HomeController@index')->name('home');
