@@ -51,4 +51,9 @@ class LoginController extends Controller
             'password' => ['required' , 'string'],
         ]);
     }
+
+    public function showLoginForm()
+    {
+        return view('students.auth.login');
+    }
 }

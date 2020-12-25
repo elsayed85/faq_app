@@ -14,14 +14,17 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    
     protected $namespace = 'App\Http\Controllers';
+
+    protected $adminNamespace = "App\Http\Controllers\Admin";
 
     /**
      * The path to the "home" route for your application.
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/stu/home';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -46,7 +49,28 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapAdminRoutes();
+
         //
+    }
+
+    /**
+     * Define the "admin" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'admin', 'auth:admin'],
+            'prefix' => 'admin',
+            'as' => 'admin.',
+            'namespace' => $this->adminNamespace,
+        ], function ($router) {
+            require base_path('routes/admin.php');
+        });
     }
 
     /**
