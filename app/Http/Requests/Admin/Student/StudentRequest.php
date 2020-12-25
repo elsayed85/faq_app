@@ -31,7 +31,7 @@ class StudentRequest extends FormRequest
         } elseif ($this->isMethod("PUT") || $this->isMethod("PATCH")) {
             return [
                 'username' => ['sometimes', 'max:60'],
-                'password' => ['sometimes' , 'min:6' , 'max:50']
+                'new_password' => ['sometimes' , 'nullable' , 'min:6' , 'max:50']
             ];
         }
         return [];

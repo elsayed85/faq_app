@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Student\ChnagePassword;
 use App\Http\Requests\Admin\Student\StudentRequest;
+use App\Http\Requests\Admin\UpdateInfoRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -66,7 +67,7 @@ class StudentController extends Controller
      */
     public function edit(User $student)
     {
-        //
+        return view('admin.students.edit', get_defined_vars());
     }
 
     /**
@@ -78,7 +79,14 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, User $student)
     {
-        //
+        if ($request->has('username')) {
+            $student->username = $request->username;
+        }
+        if ($request->has('new_password') && !is_null($request->new_password)) {
+            $student->password = Hash::make($request->new_password);
+        }
+        $student->save();
+        return redirect(route('admin.stu.show' , $student))->withSuccess("{$student->username} Updated succfully");
     }
 
     /**

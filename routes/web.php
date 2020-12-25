@@ -27,5 +27,7 @@ Route::group(['prefix' => 'admin', 'as' => "admin."], function () {
 
 Route::group(['prefix' => 'stu', 'as' => "stu.", 'namespace' => "Student", 'middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/settings', "HomeController@settings")->name('settings');
+    Route::put("/change-password", "HomeController@ChangePassword")->name("change_password");
     Route::resource('task', "TaskController")->names("task");
 });

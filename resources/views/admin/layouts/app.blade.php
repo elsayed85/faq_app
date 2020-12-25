@@ -39,6 +39,7 @@
 
                     </ul>
 
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -64,12 +65,17 @@
                                     {{ __('Logout') }}
                                 </a>
 
+                                <a class="dropdown-item" href="{{ route('admin.settings') }}" >
+                                    {{ __('Settings') }}
+                                </a>
+
                                 <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
                                     class="d-none">
                                     @csrf
                                 </form>
                             </div>
                         </li>
+
                         @endguest
                     </ul>
                 </div>
@@ -83,6 +89,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script>
         @if(session()->has('success'))
         Swal.fire({
