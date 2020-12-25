@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Student\ChnagePassword;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -44,9 +47,11 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $student)
     {
-        //
+        $tasks = $student->tasks()->latest()->withCount("comments")->paginate(10, ['*'], "tasks_pnum");
+        $comments = $student->load(['comments.commentable'])->comments()->paginate(10, ['*'], "comments_pnum");
+        return view('admin.students.show',  get_defined_vars());
     }
 
     /**
@@ -81,5 +86,11 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changePassword(ChnagePassword $request, User $student)
+    {
+        auth()->user()->update(['password' => Hash::make($request->new_password)]);
+        return back()->withSuccess("{$student->username} password updated succfully");
     }
 }
