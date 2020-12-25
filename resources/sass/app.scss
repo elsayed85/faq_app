@@ -6,3 +6,17 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.notifications tr.readed {
+    background: yellow;
+}
+
+.notifications .badge.badge-info {
+    background: #000;
+    color: #fff;
+}
+
+.notifications tr
+{
+ cursor: pointer;
+}

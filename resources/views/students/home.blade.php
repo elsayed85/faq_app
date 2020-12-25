@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    @livewire('student.notifications')
+                    @livewire('notifications')
                 </div>
             </div>
         </div>

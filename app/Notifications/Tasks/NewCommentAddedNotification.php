@@ -59,7 +59,8 @@ class NewCommentAddedNotification extends Notification
     {
         return [
             "type" => "task_new_comment",
-            'task_id' => $this->comment->commentable()->getKey(),
+            'task_id' => $this->comment->commentable->id,
+            'comment_id' => $this->comment->id,
             'msg' => $this->comment->comment
         ];
     }

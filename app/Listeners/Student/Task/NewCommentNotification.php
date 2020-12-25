@@ -31,14 +31,10 @@ class NewCommentNotification
      */
     public function handle(CommentCreated $event)
     {
-        try {
-            $event->comment->commentable->comments->pluck('commenter')->unique()->filter(function ($key, $value) use ($event) {
-                return $key->id != $event->comment->commenter->id;
-            })->each(function ($user) use ($event) {
-                $user->notfiy(new NewCommentAddedNotification($event->comment));
-            });
-        } catch (Exception $e) {
-            //
-        }
+        $event->comment->commentable->comments->pluck('commenter')->push($event->comment->commentable->user)->unique()->filter(function ($key, $value) use ($event) {
+            return $key->id != $event->comment->commenter->id;
+        })->each(function ($user) use ($event) {
+            $user->notify(new NewCommentAddedNotification($event->comment));
+        });
     }
 }

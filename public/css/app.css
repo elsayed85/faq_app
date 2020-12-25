@@ -10903,3 +10903,16 @@ a.text-dark:focus {
   }
 }
 
+.notifications tr.readed {
+  background: yellow;
+}
+
+.notifications .badge.badge-info {
+  background: #000;
+  color: #fff;
+}
+
+.notifications tr {
+  cursor: pointer;
+}
+
