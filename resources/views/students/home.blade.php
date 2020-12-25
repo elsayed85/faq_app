@@ -19,8 +19,8 @@
                                         <div class="card-body">
                                             <div class="media d-flex">
                                                 <div class="media-body text-center">
-                                                    <h3>278</h3>
-                                                    <span>Tasks Count</span>
+                                                    <h3>{{ $tasksCount }}</h3>
+                                                    <span>Tasks</span>
                                                 </div>
                                             </div>
                                         </div>

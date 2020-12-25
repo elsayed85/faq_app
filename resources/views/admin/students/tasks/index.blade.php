@@ -56,7 +56,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" style="text-align: center">No Tasks Yet</td>
+                                    <td colspan="7" style="text-align: center">No Tasks Yet</td>
                                 </tr>
                                 @endforelse
                             </tbody>

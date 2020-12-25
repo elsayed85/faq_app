@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('students.home');
+        $tasksCount = auth()->user()->tasks()->count();
+        return view('students.home' , get_defined_vars());
     }
 }

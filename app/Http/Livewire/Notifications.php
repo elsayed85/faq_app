@@ -32,6 +32,5 @@ class Notifications extends Component
         if (is_null($notification->read_at)) {
             return $notification->markAsRead();
         }
-        return $notification->markAsUnRead();
     }
 }

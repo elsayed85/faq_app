@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Student;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Student\ChnagePassword;
+use App\Http\Requests\Admin\Student\StudentRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = User::latest()->withCount('tasks')->paginate(10, ['*'], "users_page");
+        return view('admin.students.index', get_defined_vars());
     }
 
     /**
@@ -27,7 +29,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.students.create', get_defined_vars());
     }
 
     /**
@@ -36,9 +38,11 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        //
+        $student = User::create(['username' => $request->username, 'password' => Hash::make($request->password)]);
+        session()->flash("new_student", $student);
+        return back()->withSuccess("{$student->username} Created succfully");
     }
 
     /**
@@ -60,7 +64,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $student)
     {
         //
     }
@@ -72,7 +76,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, User $student)
     {
         //
     }
@@ -83,14 +87,15 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $student)
     {
-        //
+        $student->delete();
+        return redirect(route('admin.stu.index'))->withSuccess("{$student->username} Deleted Succfully");
     }
 
     public function changePassword(ChnagePassword $request, User $student)
     {
-        auth()->user()->update(['password' => Hash::make($request->new_password)]);
+        $student->update(['password' => Hash::make($request->new_password)]);
         return back()->withSuccess("{$student->username} password updated succfully");
     }
 }

@@ -53,7 +53,7 @@
                             </li>
                         </a>
                         @empty
-                        <li class="empty_list">No Tasks yet</li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center empty_list">No Tasks yet</li>
                         @endforelse
                         {{ $tasks->render() }}
                     </ul>

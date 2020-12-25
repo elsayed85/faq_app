@@ -18,7 +18,7 @@
                                             <div class="media d-flex">
                                                 <div class="media-body text-center">
                                                     <h3>{{ $studentsCount }}</h3>
-                                                    <span>Students Count</span>
+                                                    <span>Students</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -34,7 +34,7 @@
                                             <div class="media d-flex">
                                                 <div class="media-body text-center">
                                                     <h3>{{ $tasksCount }}</h3>
-                                                    <span>Tasks Count</span>
+                                                    <span>Tasks</span>
                                                 </div>
                                             </div>
                                         </div>
